@@ -1,0 +1,12 @@
+{
+  "kind": "evm_contracts",
+  "contracts": [
+    {
+      "contract": "HamsterOracle",
+      "constructorArgs": [
+        "100"
+      ]
+    }
+  ],
+  "notes": "HamsterOracle is the single application contract of the Hamster Oracle prediction game on Sepolia (chain id 11155111). Its only constructor parameter is uint64 threshold_, the immutable work boundary between JOG and SPRINT; the brief's default of 100 is used, so NAP = work 0, JOG = work 1..99, SPRINT = work 100 or more. The constructor accepts 1..10000 and reverts outside Sepolia; it makes no external calls, so factory rehearsal on an empty chain succeeds. There is no owner, admin, oracle key, pausing or upgrade path, and the manifest intentionally passes no $owner: the contract has no privileged role to fill. The SqueekCore proxy (0x980B4424c007CAf7a1f3670B48c8EaEf7EbC3d44), genesis timestamp 1793022600 and 600-second round duration are compile-time constants read directly from the accepted source, not constructor inputs. Players predict future rounds; anyone settles a round once SqueekCore records it, with points 1 for a correct pick, 3 for a correct SPRINT and a streak bonus of up to +5. No token, pool, ETH funding or initialization call is involved; deployment value is zero."
+}
