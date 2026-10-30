@@ -1,0 +1,32 @@
+[profile.default]
+src = "src"
+test = "test"
+script = "script"
+out = "out"
+libs = ["lib"]
+solc = "0.8.26"
+evm_version = "cancun"
+optimizer = true
+optimizer_runs = 200
+bytecode_hash = "none"
+no_match_path = "test/fork/**"
+
+[profile.default.fuzz]
+runs = 512
+seed = "0xe2a1b90ca5dafcc24a60afd0ba176327e8bef6600ab7b5802b985b2bdbb72138"
+
+[profile.default.invariant]
+runs = 128
+depth = 128
+fail_on_revert = true
+
+# Explicit, network-dependent integration suite; ordinary builds/tests stay offline.
+[profile.fork]
+no_match_path = "test/scratch/**"
+match_path = "test/fork/**"
+eth_rpc_url = "https://sepolia.gateway.tenderly.co"
+fork_block_number = 12025393
+
+[fmt]
+line_length = 110
+

@@ -1,0 +1,902 @@
+[
+  {
+    "inputs": [],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "inputs": [],
+    "name": "AuthorizationNonceMismatch",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "BatchTooLarge",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "BlockNotSettled",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "ECDSAInvalidSignature",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "length",
+        "type": "uint256"
+      }
+    ],
+    "name": "ECDSAInvalidSignatureLength",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "s",
+        "type": "bytes32"
+      }
+    ],
+    "name": "ECDSAInvalidSignatureS",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "EnforcedPause",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "ExpectedPause",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "ExpiredAuthorization",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "InvalidActiveRound",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "InvalidGenesisTimestamp",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "InvalidGuardian",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "InvalidImplementationCodeAddress",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "InvalidInitialization",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "InvalidProxyAdmin",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "InvalidReporter",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "InvalidReporterSignature",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "InvalidRoundId",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "InvalidRoundPageBounds",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "InvalidStreamId",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "InvalidWorkCap",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "InvalidWorkPerThousandBlocks",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "NonIncreasingRoundId",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "NotInitializing",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "ReporterAlreadyUsed",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "RoundNotElapsed",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint8",
+        "name": "bits",
+        "type": "uint8"
+      },
+      {
+        "internalType": "uint256",
+        "name": "value",
+        "type": "uint256"
+      }
+    ],
+    "name": "SafeCastOverflowedUintDowncast",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "SettledThroughRoundNotAdvanced",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "UnauthorizedGuardian",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "WorkExceeded",
+    "type": "error"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "digest",
+        "type": "bytes32"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "reporter",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint64",
+        "name": "settledThroughRound",
+        "type": "uint64"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "nonce",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint64",
+        "name": "previousSettledThroughRound",
+        "type": "uint64"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint16",
+        "name": "activeRoundCount",
+        "type": "uint16"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint64",
+        "name": "cumulativeWork",
+        "type": "uint64"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint96",
+        "name": "cumulativeBlockUnits",
+        "type": "uint96"
+      }
+    ],
+    "name": "BatchSettled",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "streamId",
+        "type": "bytes32"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "guardian",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "reporter",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint64",
+        "name": "genesisTimestamp",
+        "type": "uint64"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint32",
+        "name": "initialWorkPerThousandBlocks",
+        "type": "uint32"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint64",
+        "name": "maxWorkPerRound",
+        "type": "uint64"
+      }
+    ],
+    "name": "CoreInitialized",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [],
+    "name": "EIP712DomainChanged",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint64",
+        "name": "version",
+        "type": "uint64"
+      }
+    ],
+    "name": "Initialized",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "Paused",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "previousReporter",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "newReporter",
+        "type": "address"
+      }
+    ],
+    "name": "ReporterUpdated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint64",
+        "name": "roundId",
+        "type": "uint64"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint64",
+        "name": "work",
+        "type": "uint64"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint64",
+        "name": "cumulativeWork",
+        "type": "uint64"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint96",
+        "name": "cumulativeBlockUnits",
+        "type": "uint96"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint32",
+        "name": "workPerThousandBlocks",
+        "type": "uint32"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes32",
+        "name": "dataHash",
+        "type": "bytes32"
+      }
+    ],
+    "name": "RoundRecorded",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "Unpaused",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint64",
+        "name": "squeekBlock",
+        "type": "uint64"
+      }
+    ],
+    "name": "blockInfo",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint64",
+            "name": "roundId",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint64",
+            "name": "workThreshold",
+            "type": "uint64"
+          }
+        ],
+        "internalType": "struct BlockInfo",
+        "name": "result",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "configuration",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "bytes32",
+            "name": "streamId",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "uint64",
+            "name": "genesisTimestamp",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint64",
+            "name": "roundDuration",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint64",
+            "name": "maxWorkPerRound",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint16",
+            "name": "maxRoundsPerBatch",
+            "type": "uint16"
+          },
+          {
+            "internalType": "address",
+            "name": "guardian",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "reporter",
+            "type": "address"
+          },
+          {
+            "internalType": "uint32",
+            "name": "initialWorkPerThousandBlocks",
+            "type": "uint32"
+          },
+          {
+            "internalType": "uint64",
+            "name": "targetBlocksPerActiveRound",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint64",
+            "name": "difficultySmoothingRounds",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint96",
+            "name": "blockUnitsPerBlock",
+            "type": "uint96"
+          }
+        ],
+        "internalType": "struct CoreConfiguration",
+        "name": "result",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "eip712Domain",
+    "outputs": [
+      {
+        "internalType": "bytes1",
+        "name": "fields",
+        "type": "bytes1"
+      },
+      {
+        "internalType": "string",
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "version",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "chainId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "verifyingContract",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "salt",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "extensions",
+        "type": "uint256[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "candidate",
+        "type": "address"
+      }
+    ],
+    "name": "hasEverBeenReporter",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "implementationCodeAddress",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "implementationCodeVersion",
+    "outputs": [
+      {
+        "internalType": "uint64",
+        "name": "",
+        "type": "uint64"
+      }
+    ],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "implementationStorageLayoutDigest",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "bytes32",
+            "name": "streamId",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "address",
+            "name": "guardian",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "initialReporter",
+            "type": "address"
+          },
+          {
+            "internalType": "uint64",
+            "name": "genesisTimestamp",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint32",
+            "name": "initialWorkPerThousandBlocks",
+            "type": "uint32"
+          },
+          {
+            "internalType": "uint64",
+            "name": "maxWorkPerRound",
+            "type": "uint64"
+          }
+        ],
+        "internalType": "struct SqueekLaunchConfig",
+        "name": "config",
+        "type": "tuple"
+      }
+    ],
+    "name": "initialize",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "pause",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "paused",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "proxyAdmin",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint64",
+        "name": "afterRound",
+        "type": "uint64"
+      },
+      {
+        "internalType": "uint64",
+        "name": "throughRound",
+        "type": "uint64"
+      },
+      {
+        "internalType": "uint256",
+        "name": "maxRecords",
+        "type": "uint256"
+      }
+    ],
+    "name": "roundPage",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint64",
+            "name": "certifiedThroughRound",
+            "type": "uint64"
+          },
+          {
+            "components": [
+              {
+                "internalType": "uint64",
+                "name": "cumulativeWork",
+                "type": "uint64"
+              },
+              {
+                "internalType": "uint96",
+                "name": "cumulativeBlockUnits",
+                "type": "uint96"
+              },
+              {
+                "internalType": "uint32",
+                "name": "workPerThousandBlocks",
+                "type": "uint32"
+              }
+            ],
+            "internalType": "struct LedgerPosition",
+            "name": "start",
+            "type": "tuple"
+          },
+          {
+            "components": [
+              {
+                "internalType": "uint64",
+                "name": "cumulativeWork",
+                "type": "uint64"
+              },
+              {
+                "internalType": "uint96",
+                "name": "cumulativeBlockUnits",
+                "type": "uint96"
+              },
+              {
+                "internalType": "uint32",
+                "name": "workPerThousandBlocks",
+                "type": "uint32"
+              }
+            ],
+            "internalType": "struct LedgerPosition",
+            "name": "end",
+            "type": "tuple"
+          },
+          {
+            "components": [
+              {
+                "internalType": "uint64",
+                "name": "roundId",
+                "type": "uint64"
+              },
+              {
+                "internalType": "uint64",
+                "name": "cumulativeWork",
+                "type": "uint64"
+              },
+              {
+                "internalType": "uint96",
+                "name": "cumulativeBlockUnits",
+                "type": "uint96"
+              },
+              {
+                "internalType": "uint32",
+                "name": "workPerThousandBlocks",
+                "type": "uint32"
+              },
+              {
+                "internalType": "bytes32",
+                "name": "dataHash",
+                "type": "bytes32"
+              }
+            ],
+            "internalType": "struct RoundCheckpoint[]",
+            "name": "rounds",
+            "type": "tuple[]"
+          }
+        ],
+        "internalType": "struct RoundPage",
+        "name": "result",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "newReporter",
+        "type": "address"
+      }
+    ],
+    "name": "setReporter",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "state",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint64",
+            "name": "settledThroughRound",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint64",
+            "name": "cumulativeWork",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint96",
+            "name": "cumulativeBlockUnits",
+            "type": "uint96"
+          },
+          {
+            "internalType": "uint64",
+            "name": "blockHeight",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint96",
+            "name": "blockProgress",
+            "type": "uint96"
+          },
+          {
+            "internalType": "uint32",
+            "name": "workPerThousandBlocks",
+            "type": "uint32"
+          },
+          {
+            "internalType": "uint256",
+            "name": "authorizationNonce",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bool",
+            "name": "paused",
+            "type": "bool"
+          }
+        ],
+        "internalType": "struct CoreState",
+        "name": "result",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint64",
+            "name": "roundId",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint64",
+            "name": "work",
+            "type": "uint64"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "dataHash",
+            "type": "bytes32"
+          }
+        ],
+        "internalType": "struct Round[]",
+        "name": "rounds",
+        "type": "tuple[]"
+      },
+      {
+        "internalType": "uint64",
+        "name": "settledThroughRound",
+        "type": "uint64"
+      },
+      {
+        "internalType": "uint256",
+        "name": "expectedNonce",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "deadline",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bytes",
+        "name": "signature",
+        "type": "bytes"
+      }
+    ],
+    "name": "submitRounds",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "unpause",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]
